@@ -7,6 +7,8 @@ class Game:
         # players
         self.player1 = player1
         self.player2 = player2
+        self.player1.new_instance()
+        self.player2.new_instance()
         # winning combinations
         self.win_comb = []
         self.win_comb.extend([Move(row, col) for col in range(3)] for row in range(3))
@@ -21,6 +23,9 @@ class Game:
         self.board = GameBoard(master)
         self.board.set_game(self)
         self.show_next_player()
+    
+    def __getattr__(self, attr):
+        return getattr(self.board, attr)
     
     @property
     def player1_moves(self):

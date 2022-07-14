@@ -15,3 +15,9 @@ class HasWinnerException(GameException):
 
 class MadeMoveExcepton(GameException):
     pass
+
+class WrongPlayerException(TicTacToeException):
+    pass
+
+class PlayersException(TicTacToeException):
+    pass
