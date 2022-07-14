@@ -75,6 +75,7 @@ class StartUp(tk.Frame):
         for player in self.players:
             tk.Label(player, text="What's your name").pack()
             player.namefield = tk.Entry(player, width=40)
+            player.namefield.insert(0, player.cget("text"))
             player.namefield.pack()
             tk.Label(player, text="Choose your label").pack()
             player.label = tk.StringVar()

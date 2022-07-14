@@ -7,7 +7,7 @@ from gui import StartUp
 class TicTacToe(tk.Tk):
     def __init__(self, *nargs, **kwargs) -> None:
         super().__init__(*nargs, **kwargs)
-        self.minsize(500, 500)
+        self.minsize(500, 520)
         self.games = []
         self.players = deque([], 2)
         self.startup = StartUp(self)
