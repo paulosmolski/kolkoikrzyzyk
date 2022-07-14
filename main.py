@@ -12,11 +12,11 @@ class TicTacToe(tk.Tk):
         self.players = deque([], 2)
         self.startup = StartUp(self)
         self.startup.set_game(self)
-        self.startup.pack()
+        self.startup.pack(fill="x")
     def next_game(self):
         if len(self.players) != 2:
             raise PlayersException("Wrong players, cannot start game")
-        game = Game(self, *self.players)
+        game = Game(self, self, *self.players)
         try:
             self.games[-1].pack_forget()
         except (IndexError, AttributeError):

@@ -8,9 +8,6 @@ class GameBoard(tk.Frame):
         self.buttons = [[None for x in range(3)] for y in range(3)]
         self.create_buttons(text="", highlightbackground="grey")
         self.game = None
-        self.curname = tk.StringVar()
-        self.namelabel = tk.Label(self, textvariable=self.curname)
-        self.namelabel.grid(row=3, column=0, columnspan=3)
 
     def create_buttons(self, **kwargs):
         maxrow = 3
@@ -37,16 +34,34 @@ class GameBoard(tk.Frame):
     
     def set_game(self, game):
         self.game = game
+    
+    def set_main(self, main):
+        self.main = main
 
     def message(self, player: Player, message):
         self.curname.set(message)
         self.namelabel.config(fg=player.color)
 
     def nextplayer(self, player: Player):
-        self.message(player, player.name)
+        self.message(player, f"{player.name} moves")
     
     def winningplayer(self, player: Player):
         self.message(player, f"{player.name} won")
+    
+    def bottom_panel(self):
+        self.panel = tk.Frame(self)
+        for x in range(4):
+            self.panel.columnconfigure(x, weight=1)
+        self.scorepl1 = tk.Label(self.panel, text=f"{self.game.player1.name}: {self.game.player1.victories}", fg=self.game.player1.color)
+        self.scorepl1.grid(column=0, row=0)
+        self.scorepl2 = tk.Label(self.panel, text=f"{self.game.player2.name}: {self.game.player2.victories}", fg=self.game.player2.color)
+        self.scorepl2.grid(column=1, row=0)
+        self.curname = tk.StringVar()
+        self.namelabel = tk.Label(self.panel, textvariable=self.curname)
+        self.namelabel.grid(column=2, row=0)
+        self.nextbutton = tk.Button(self.panel, text="Next game", command=self.main.next_game)
+        self.nextbutton.grid(column=3, row=0)
+        self.panel.grid(column=0, row=3, columnspan=3, sticky="nesw")
 
 class StartUp(tk.Frame):
     def __init__(self, *nargs, **kwargs):

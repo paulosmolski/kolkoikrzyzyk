@@ -4,7 +4,9 @@ from gui import GameBoard
 import time
 
 class Game:
-    def __init__(self, master, player1: Player, player2: Player) -> None:
+    def __init__(self, master, main, player1: Player, player2: Player) -> None:
+        # set main
+        self.main = main
         # measure time
         self.timetaken = None
         self.start = time.time()
@@ -26,6 +28,8 @@ class Game:
         # board
         self.board = GameBoard(master)
         self.board.set_game(self)
+        self.board.set_main(self.main)
+        self.board.bottom_panel()
         self.show_next_player()
     
     def __getattr__(self, attr):
