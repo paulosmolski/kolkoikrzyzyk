@@ -1,9 +1,13 @@
 from elements import Player, Move
 from exceptions import HasWinnerException, MadeMoveExcepton
 from gui import GameBoard
+import time
 
 class Game:
     def __init__(self, master, player1: Player, player2: Player) -> None:
+        # measure time
+        self.timetaken = None
+        self.start = time.time()
         # players
         self.player1 = player1
         self.player2 = player2
@@ -58,9 +62,12 @@ class Game:
             self.check_winner()
             for comb in self.win_comb:
                 if all(move in self.player1_moves for move in comb):
+                    self.end = time.time()
+                    self.timetaken = self.end - self.start
                     self.winner = self.player1
-                    print("Has a winner")
-                    self.board.winningplayer(self.player1)
+                    self.winner.won()
+                    print(f"Player {self.winner.name} won in {self.timetaken} seconds")
+                    self.board.winningplayer(self.winner)
                     break
         except HasWinnerException:
             pass

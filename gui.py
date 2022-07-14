@@ -94,11 +94,12 @@ class StartUp(tk.Frame):
     
     def set_game(self, game):
         self.game = game
+    
+class History(tk.Frame):
+    def __init__(self, game, *args, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
+        self.game = game
+        self.games = game.games
 
-
-if __name__ == "__main__":
-    root = tk.Tk()
-    root.minsize(500, 500)
-    start = StartUp(root)
-    start.pack()
-    root.mainloop()
+class Menu(tk.Frame):
+    pass

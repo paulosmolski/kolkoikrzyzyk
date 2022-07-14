@@ -16,6 +16,7 @@ class Player:
     label: str
     color: str
     history: list = field(default_factory=list)
+    victories: int = field(default=0)
 
     def add_move(self, move: Move):
         self.moves.append(move)
@@ -26,3 +27,6 @@ class Player:
     @property
     def all_moves(self):
         return self.history[-1]
+    
+    def won(self):
+        self.victories += 1
